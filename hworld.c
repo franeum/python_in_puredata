@@ -9,7 +9,7 @@
  * define a new "class" 
  */
 static t_class *hworld_class;
-double read_script(double f);
+t_float read_script(t_float f);
 
 /**
  * this is the dataspace of our new object
@@ -136,16 +136,21 @@ void hworld_bang(t_hworld *x)
 
 
 
-double read_script(double f)
+t_float read_script(t_float f)
 {
     PyObject *pName, *pModule, *pFunc;
     PyObject *pArgs, *pValue;
     //int i;
-    double result = 0.0;
+    t_float result = 0.0;
 
     Py_Initialize();
     //pName = PyUnicode_DecodeFSDefault(argv[1]);
     /* Error checking of pName left out */
+
+
+    PyRun_SimpleString("import sys");
+    PyRun_SimpleString("sys.path.append(\"/home/neum/Documenti/python_in_puredata\")");
+
 
     pName = PyUnicode_DecodeFSDefault("thesimple");
     pModule = PyImport_Import(pName);
@@ -171,7 +176,9 @@ double read_script(double f)
                 PyTuple_SetItem(pArgs, i, pValue);
             }
             */
-            pArgs = PyFloat_FromDouble(f);
+            pArgs = PyFloat_AsDouble(10.0);
+
+            post("value: %f", pArgs);
 
             pValue = PyObject_CallObject(pFunc, pArgs);
             Py_DECREF(pArgs);
