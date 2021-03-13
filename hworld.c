@@ -132,6 +132,11 @@ void hworld_bang(t_hworld *x)
 
 
 
+void hworld_float(t_hworld *x, t_floatarg f)
+{
+    outlet_float(x->x_obj.ob_outlet, read_script(f));    
+}
+
 
 
 
@@ -176,22 +181,24 @@ t_float read_script(t_float f)
                 PyTuple_SetItem(pArgs, i, pValue);
             }
             */
-            pArgs = PyFloat_AsDouble(10.0);
+            pArgs = PyTuple_New(1);
+            PyTuple_SetItem(pArgs, 0, PyFloat_FromDouble(f));
+            //pArgs = PyFloat_FromDouble(10.0);
 
-            post("value: %f", pArgs);
+            //post("value: %f", pArgs);
 
             pValue = PyObject_CallObject(pFunc, pArgs);
             Py_DECREF(pArgs);
 
             if (pValue != NULL) {
                 //printf("Result of call: %ld\n", PyLong_AsLong(pValue));
-                result = PyLong_AsLong(pValue);
+                result = (t_float)PyLong_AsLong(pValue);
                 Py_DECREF(pValue);
             } else {
                 Py_DECREF(pFunc);
                 Py_DECREF(pModule);
                 PyErr_Print();
-                post("Call failed\n");
+                post("Call failed");
                 return 1.0;
             }
         }
@@ -272,4 +279,5 @@ void hworld_setup(void) {
    * it will be called whenever a bang is received
    */
   class_addbang(hworld_class, hworld_bang); 
+  class_addfloat(hworld_class, hworld_float);
 }
