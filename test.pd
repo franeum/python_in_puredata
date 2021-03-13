@@ -1,0 +1,7 @@
+#N canvas 517 472 450 300 12;
+#X obj 93 124 hworld;
+#X obj 93 89 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 93 149 print;
+#X connect 0 0 2 0;
+#X connect 1 0 0 0;
