@@ -135,13 +135,18 @@ t_float read_script(t_newpy *x, t_symbol *funcname, t_float f)
 
                 //outlet_float(x->x_obj.ob_outlet, read_script(x, funcname, arg));
                 //outlet_list(x->x_obj.ob_outlet, &s_list, size);
-                t_atom *tastoma;
+
+                t_float arr[size];
 
                 for (int i = 0; i < size; i++)
                 {
+                    arr[i] = PyFloat_AsDouble(PyList_GetItem(pValue, i));
                 }
 
+                t_atom *tastoma;
+
                 Py_DECREF(pValue);
+                outlet_list(x->x_obj.ob_outlet, &s_list, size, arr);
             }
             else
             {
