@@ -1,0 +1,34 @@
+#N canvas 508 78 1236 807 12;
+#N canvas 0 50 450 250 (subpatch) 0;
+#X array tastoma 9.261e+06 float 0;
+#X coords 0 1 9.261e+06 -1 200 140 1;
+#X restore 90 68 graph;
+#X obj 300 163 tastomarray tastoma;
+#X obj 300 141 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X msg 160 233 const 0;
+#X obj 160 258 s tastoma;
+#X obj 74 248 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 74 268 openpanel;
+#X msg 74 293 read -resize \$1 tastoma;
+#X obj 74 318 soundfiler;
+#X floatatom 74 343 0 0 0 0 - - -;
+#X obj 300 218 route start stop;
+#X obj 300 187 list trim;
+#X obj 300 266 timer;
+#X floatatom 300 290 0 0 0 0 - - -;
+#X obj 380 276 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X connect 1 0 11 0;
+#X connect 2 0 1 0;
+#X connect 3 0 4 0;
+#X connect 5 0 6 0;
+#X connect 6 0 7 0;
+#X connect 7 0 8 0;
+#X connect 8 0 9 0;
+#X connect 10 0 12 0;
+#X connect 10 1 12 1;
+#X connect 11 0 10 0;
+#X connect 12 0 13 0;
+#X connect 14 0 12 1;
