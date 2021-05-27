@@ -1,4 +1,4 @@
-#N canvas 802 488 761 514 12;
+#N canvas 508 62 761 514 12;
 #X msg 45 30 import random;
 #X msg 284 149 func random;
 #X floatatom 80 283 5 0 0 0 - - -;
@@ -13,18 +13,25 @@
 #X obj 41 237 print;
 #X msg 225 22 casual;
 #X msg 43 128 callist;
-#X msg 205 276 random_matrix 10;
+#X obj 571 220 metro 100;
+#X obj 585 175 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X floatatom 654 197 5 0 0 0 - - -;
+#X msg 205 276 random_matrix 100;
 #X connect 0 0 7 0;
 #X connect 1 0 7 0;
 #X connect 3 0 7 0;
 #X connect 4 0 7 0;
 #X connect 5 0 7 0;
 #X connect 6 0 7 0;
-#X connect 7 0 11 0;
 #X connect 7 0 2 0;
+#X connect 7 0 11 0;
 #X connect 8 0 7 0;
 #X connect 9 0 10 0;
 #X connect 10 0 7 0;
 #X connect 12 0 7 0;
 #X connect 13 0 7 0;
-#X connect 14 0 7 0;
+#X connect 14 0 17 0;
+#X connect 15 0 14 0;
+#X connect 16 0 14 1;
+#X connect 17 0 7 0;

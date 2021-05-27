@@ -46,7 +46,7 @@ void newpy_anything(t_newpy *x, t_symbol *s, int argc, t_atom *argv)
     //if (argc)
     //arg = atom_getfloat(&argv[0]);
 
-    outlet_float(x->x_obj.ob_outlet, read_script(x, s, arg));
+    //outlet_float(x->x_obj.ob_outlet, read_script(x, s, arg));
 }
 
 void newpy_import(t_newpy *x, t_symbol *s, int argc, t_atom *argv)
@@ -137,16 +137,20 @@ t_float read_script(t_newpy *x, t_symbol *funcname, t_float f)
                 //outlet_list(x->x_obj.ob_outlet, &s_list, size);
 
                 t_float arr[size];
+                t_atom tastoma[size];
+
+                //SETFLOAT(&x->result[i], x->l_list[i].a_w.w_float / x->r_list[i].a_w.w_float);
 
                 for (int i = 0; i < size; i++)
                 {
-                    arr[i] = PyFloat_AsDouble(PyList_GetItem(pValue, i));
+                    t_float item = PyFloat_AsDouble(PyList_GetItem(pValue, i));
+                    SETFLOAT(&tastoma[i], item);
                 }
 
-                t_atom *tastoma;
+                //t_atom *tastoma;
 
                 Py_DECREF(pValue);
-                outlet_list(x->x_obj.ob_outlet, &s_list, size, arr);
+                outlet_list(x->x_obj.ob_outlet, &s_list, size, tastoma);
             }
             else
             {
