@@ -46,7 +46,7 @@ void newpy_anything(t_newpy *x, t_symbol *s, int argc, t_atom *argv)
     //if (argc)
     //arg = atom_getfloat(&argv[0]);
 
-    //outlet_float(x->x_obj.ob_outlet, read_script(x, s, arg));
+    outlet_float(x->x_obj.ob_outlet, read_script(x, s, arg));
 }
 
 void newpy_import(t_newpy *x, t_symbol *s, int argc, t_atom *argv)
