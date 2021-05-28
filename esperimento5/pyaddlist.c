@@ -192,10 +192,16 @@ void *pyaddlist_new(void)
     PyRun_SimpleString("sys.path.append(\"/home/neum/Documenti/python_in_puredata/esperimento5\")");
     PyRun_SimpleString("print('python version is:', sys.version)");
     PyRun_SimpleString("print(sys.prefix)");
-    char *vedoma = Py_GetProgramName();
+    wchar_t *vedoma = Py_GetProgramName();
 
     post("%ls", vedoma);
     post("%ls", Py_GetExecPrefix());
+    post("%ls", Py_GetProgramFullPath());
+    post("%s", Py_GetPlatform());
+    size_t *sz;
+    *sz = 2;
+    Py_SetPythonHome(Py_DecodeLocale("./", sz));
+    post("%ls", Py_GetPythonHome());
     outlet_new(&x->x_obj, &s_float);
 
     /*
